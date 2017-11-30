@@ -50,5 +50,19 @@ class RootViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         return section == 0 ? "All Font Families" : "My Favourite Fonts"
     }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 0  {
+            // the font names list
+            let cell = tableView.dequeueReusableCell(withIdentifier: RootViewController.familyCell, for: indexPath)
+            cell.textLabel?.font = fontForDisplay(atIndexPath: indexPath as NSIndexPath)
+            cell.textLabel?.text = familyNames[indexPath.row]
+            cell.detailTextLabel?.text = familyNames[indexPath.row]
+            return cell
+        } else {
+            // the favourites list
+            return tableView.dequeueReusableCell(withIdentifier: RootViewController.favouritesCell, for: indexPath)
+        }
+    }
 
 }
